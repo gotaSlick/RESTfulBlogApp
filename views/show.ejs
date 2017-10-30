@@ -1,0 +1,24 @@
+<% include partials/header %>
+
+<div class="ui main text container segment">
+    <div class="ui huge header"><%= blog.title %></div>
+    <div class="ui top attached">  <!-- creates a little border around the things -->
+        <div class="item">
+            <img class="ui centered rounded image" src="<%= blog.image %>">
+            <div class="content">
+                <!-- toDateString -> user friendly format of date -->                
+                <span><%= blog.created.toDateString() %></span> 
+            </div>
+            <div class="description">
+                <p><%- blog.body %></p> <!-- the dash makes it possible for the users to use the html while typing their post -->
+            </div>
+            <form id="delete" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
+                <button class="ui inverted red big button">Delete</button>
+            </form>
+                <a class="ui inverted green big button" href="/blogs/<%= blog._id %>/edit">Edit</a>
+        </div>
+    </div>
+   
+</div>
+
+<% include partials/footer %>
