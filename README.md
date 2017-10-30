@@ -1,1 +1,2 @@
 # RESTfulBlogApp
+Exercising RESTful programming.
