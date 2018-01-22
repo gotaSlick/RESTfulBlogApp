@@ -15,7 +15,7 @@ app.use(methodOverride("_method"));
 
 //MONGOOSE/MODEL CONFIG
 //the blog posts will have title, image, 
-//body (text), and created (means a date when it was created):
+//body (text), and created (the date when it was created):
 var blogSchema = new mongoose.Schema({
     title: String,
     image: String,
@@ -24,19 +24,12 @@ var blogSchema = new mongoose.Schema({
     created: {
         type: Date,
         default: Date.now
-    } //says that created is a date and there is
-    // the default value set which is date.now
+    } //says that created is a date and there is the default value set to date.now
 });
 var Blog = mongoose.model("Blog", blogSchema); //compile the schema into the model
 
-//Hardcoded entry into the database for the starters:
-// Blog.create({
-//     title: "VST plugins",
-//     image: "https://farm6.staticflickr.com/5517/10911698373_1a561d4638.jpg",
-//     body: "Find the most useful VST plugins for your favorite music software"
-// });
-
 //RESTFUL ROUTES
+
 app.get("/", function(req, res){
     res.redirect("/blogs");
 });
@@ -50,17 +43,19 @@ app.get("/blogs", function(req, res){
         }
     });
 });
+
 // NEW ROUTE
 app.get("/blogs/new", function(req, res){
     res.render("new");
 });
+
 // CREATE ROUTE
 app.post("/blogs", function(req, res){
     //Create blog
     Blog.create(req.body.blog,/*data*/ function(err, newBlog){ // 2 args: data, callback. 
         // data here is req.body.blog inside of the form in new.ejs, 
         // in this case blog[title], blog[image] and blog[body] (grouped together)
-        // so that if we request .blog, it automatically has title, image and body.
+        // so that if.blog is requested, it automatically has title, image and body.
         if(err){
             res.render("new"); //renders the NEW form again
         } else {
